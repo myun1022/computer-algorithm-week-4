@@ -56,6 +56,8 @@ public class ClosestPairOfPoints {
 
     }
 
+    //21.03.28 우선은 X축 정렬 까지만 작업
+
 
 
 
