@@ -1,5 +1,3 @@
-
-
 //03.29(MON) : 랜덤 N개의 점 X좌표 오름차순 정렬 구현 (합병 정렬)
 
 import java.util.Random;
@@ -42,23 +40,35 @@ public class ClosestPairOfPoints {
 
     static int divideConquer(int [][]arr,int left, int right) {
 
+/* 점이 몇개 안될 때, ppt처럼 3개 이하일 때는 정렬 이용x 그냥 구한다.
+    if(arr.length<=3) {
+        double min = 100;
+        double xmin,ymin = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                double distance = getDistance(arr, i, j);
+                if (distance < min) {
+                    min = distance;
+                    xmin = i;
+                    ymin = j;
+                }
+
+            }
+            System.out.println(min+" "+xㅎmin+" "+ymin);
+        }
+    }
+*/
+
+
         int mid = (left + right) / 2;
         int leftside = divideConquer(arr,left, mid);        // 왼쪽부터 중간
         int rightside = divideConquer(arr, mid + 1, right);    // 중간부터 오른쪽
 
         int min = leftside < rightside ? leftside : rightside;
 
-
-
-
-
         return min;
 
     }
-
-
-
-
 
 
     static double getDistance(int[][] arr, int a, int b) {
@@ -102,7 +112,5 @@ public class ClosestPairOfPoints {
             )
             System.out.println(s);
         }
-
  *
  * */
-
