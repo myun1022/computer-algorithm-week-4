@@ -4,6 +4,7 @@
 
 import java.util.Random;
 
+
 public class ClosestPairOfPoints {
 
     public static void mergeSort(int[][] A, int p, int q) {
@@ -15,21 +16,21 @@ public class ClosestPairOfPoints {
         merge(A, p, k, q);          //합병
     }
 
-    public static void merge(int[][] A, int p, int k, int q) {
+    public static void merge(int[][] A, int p, int mid, int q) {
         int[][] C = new int[q - p + 1][2];
-        int i = p, j = k + 1, n = 0;
+        int i = p, j = mid + 1, k = 0;
 
-        while (i <= k && j <= q) {
-            C[n][0] = A[i][0] < A[j][0] ? A[i][0] : A[j][0];          // x좌표가 더 작은 값 대입
-            C[n++][1] = A[i][0] < A[j][0] ? A[i++][1] : A[j++][1];    // y좌표 대입
+        while (i <= mid && j <= q) { //두 개 배열의 맨 앞 데이터를 비교해서 작은 값을 C에 저장
+            C[k][0] = A[i][0] < A[j][0] ? A[i][0] : A[j][0];          // x좌표가 더 작은 값 대입
+            C[k++][1] = A[i][0] < A[j][0] ? A[i++][1] : A[j++][1];    // y좌표 대입
         }
-        while (i <= k) {
-            C[n][0] = A[i][0];
-            C[n++][1] = A[i++][1];
+        while (i <= mid) {
+            C[k][0] = A[i][0];
+            C[k++][1] = A[i++][1];
         }
         while (j <= q) {
-            C[n][0] = A[j][0];
-            C[n++][1] = A[j++][1];
+            C[k][0] = A[j][0];
+            C[k++][1] = A[j++][1];
         }
 
         for (int a = p, b = 0; a <= q; a++) {    //기존 배열(A)에 반영
@@ -38,20 +39,26 @@ public class ClosestPairOfPoints {
         }
 
     }
-/*
-    static int divideConquer(int left, int right) {
+
+    static int divideConquer(int [][]arr,int left, int right) {
 
         int mid = (left + right) / 2;
-        int dleftsec = divideConquer(left, mid);        // 왼쪽부터 중간
-        int drightsec = divideConquer(mid + 1, right);    // 중간부터 오른쪽
+        int leftside = divideConquer(arr,left, mid);        // 왼쪽부터 중간
+        int rightside = divideConquer(arr, mid + 1, right);    // 중간부터 오른쪽
 
-        int dMin = dleftsec < drightsec ? dleftsec : drightsec;
+        int min = leftside < rightside ? leftside : rightside;
 
-        return dMin;
+        return min;
     }
-*/
-    static int getDistanceJegob(int[][] A, int a, int b) {
-        return (A[a][0] - A[b][0]) * (A[a][0] - A[b][0]) + (A[a][1] - A[b][1]) * (A[a][1] - A[b][1]);
+
+
+
+
+
+
+    static double getDistance(int[][] arr, int a, int b) {
+        return Math.sqrt(Math.pow(arr[a][0] - arr[b][0], 2) + Math.pow(arr[a][1] - arr[b][1], 2));
+
     }
 
 
@@ -71,9 +78,9 @@ public class ClosestPairOfPoints {
 
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i][0] + " " + arr[i][1] +" ");
-           // if(i!= arr.length){
-           //     System.out.println("점사이 거리 제곱은 "+getDistanceJegob(arr,i,i+1));//제곱거리 함수확인코드
-           // }
+            if(i!= arr.length){
+                System.out.println("점사이 거리는 "+getDistance(arr,i,i+1));//거리 함수확인코드
+            }
 
         }
 
@@ -81,8 +88,8 @@ public class ClosestPairOfPoints {
 }
 
 
-// 출력확인코드-> 아예 안나오네?..
-/*+ getDistanceJegob(arr,i,i+1 )
+//
+/*+
  *
  *
  * */
