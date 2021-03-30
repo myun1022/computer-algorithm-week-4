@@ -16,21 +16,21 @@ public class ClosestPairOfPoints {
         merge(A, p, k, q);          //합병
     }
 
-    public static void merge(int[][] A, int p, int mid, int q) {
+    public static void merge(int[][] A, int p, int k, int q) {
         int[][] C = new int[q - p + 1][2];
-        int i = p, j = mid + 1, k = 0;
+        int i = p, j = k + 1, n = 0;
 
-        while (i <= mid && j <= q) { //두 개 배열의 맨 앞 데이터를 비교해서 작은 값을 C에 저장
-            C[k][0] = A[i][0] < A[j][0] ? A[i][0] : A[j][0];          // x좌표가 더 작은 값 대입
-            C[k++][1] = A[i][0] < A[j][0] ? A[i++][1] : A[j++][1];    // y좌표 대입
+        while (i <= k && j <= q) {
+            C[n][0] = A[i][0] < A[j][0] ? A[i][0] : A[j][0];          // x좌표가 더 작은 값 대입
+            C[n++][1] = A[i][0] < A[j][0] ? A[i++][1] : A[j++][1];    // y좌표 대입
         }
-        while (i <= mid) {
-            C[k][0] = A[i][0];
-            C[k++][1] = A[i++][1];
+        while (i <= k) {
+            C[n][0] = A[i][0];
+            C[n++][1] = A[i++][1];
         }
         while (j <= q) {
-            C[k][0] = A[j][0];
-            C[k++][1] = A[j++][1];
+            C[n][0] = A[j][0];
+            C[n++][1] = A[j++][1];
         }
 
         for (int a = p, b = 0; a <= q; a++) {    //기존 배열(A)에 반영
