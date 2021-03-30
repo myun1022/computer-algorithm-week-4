@@ -1,4 +1,5 @@
 //03.29(Mon) : 랜덤 N개의 점 X좌표 오름차순 정렬 구현 (합병 정렬)
+//03.30(Tue) : PPT p.68에서 Line 1, 3~4 구현(분할 정복) -> 점 3개 이하일 경우까지만.. 일단은 ㅎ
 
 import java.util.Random;
 
@@ -43,12 +44,14 @@ public class ClosestPairOfPoints {
 
     static double points(int [][]A){
         int size = A.length;
+        double close = distance(A, 0, 1);
         if (size == 2) {                                  //점이 2개일 경우 그대로 점 출력
             System.out.println(A[0][0] + " " + A[0][1]);
             System.out.println(A[1][0] + " " + A[1][1]);
+            return 0;
         }
         else if (size == 3) {                              //점이 3개일 경우 그 중에 가장 근접한 2개의 점 출력(동일한 거리가 존재하면 하나의 쌍만 출력됩니다.)
-            double close = distance(A, 0, 1), d;
+            double d;
             int a = 0, b = 0;
             for (int i = 0; i < size; i++) {
                 for (int j = i+1; j < size; j++) {
@@ -59,7 +62,7 @@ public class ClosestPairOfPoints {
             System.out.println(A[a][0] + " " + A[a][1]);
             System.out.println(A[b][0] + " " + A[b][1]);
         }
-        return 0;
+        return close;
     }
 
     static double div_con(int[][] A, int left, int right) {  // 아직 중앙부분 추가 전이라 점 3개 초과일 경우 오류 발생합니다.
@@ -71,6 +74,8 @@ public class ClosestPairOfPoints {
         double CP_left = div_con(A, left ,mid);
         double CP_right = div_con(A, mid + 1, right);
         double min_dist = Math.min(CP_left, CP_right);
+
+
 
         return min_dist;
     }
