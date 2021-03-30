@@ -48,7 +48,12 @@ public class ClosestPairOfPoints {
 
         int min = leftside < rightside ? leftside : rightside;
 
+
+
+
+
         return min;
+
     }
 
 
@@ -91,5 +96,13 @@ public class ClosestPairOfPoints {
 //
 /*+
  *
+        for( int s= left; s <= right; s++ ){
+            if(
+                    (arr[s][0]-arr[s+1][0])
+            )
+            System.out.println(s);
+        }
+
  *
  * */
+
