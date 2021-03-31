@@ -83,7 +83,12 @@ public class ClosestPairOfPoints {
         mergeSortX(arr, left, right);
 
         // 좌표가 3개 이하이면 그냥 거리를 구한다
-        if(arr.length <= 3){
+
+
+
+
+
+        if(arr.length == 3){
             double distance = getDistance(arr,0,1);;
             for(int i = 0; i < arr.length; i++) {
                 for(int j = i+1; j < arr.length; j++) {
@@ -93,28 +98,36 @@ public class ClosestPairOfPoints {
             }
             return distance;
 
-        }
+        }else if(arr.length == 0){
+            System.out.println("점이 없음.");
+            return 0;
+        }else if(arr.length==1){
+            System.out.println("점이 1개밖에 없음");
+            return 0;
+        }else if(arr.length == 2){
+            return getDistance(arr,0,1);
+        }else {
 
-        // 분할 정복
-        if(left < right) {
-            int mid = (left+right)/2;
-            double CPL = div_con(arr, left, mid);
-            double CPR = div_con(arr, mid+1, right);
-            double d = Math.min(CPL, CPR); // 짧은 거리 찾기
+            // 분할 정복
+            if (left < right) {
+                int mid = (left + right) / 2;
+                double CPL = div_con(arr, left, mid);
+                double CPR = div_con(arr, mid + 1, right);
+                double d = Math.min(CPL, CPR); // 짧은 거리 찾기
 
-            int[][] part_arr = new int [right+1][2];	// 중간으로부터 x 축 기준 d 이내에 있는 점들만 배열에 저장
-            int j = 0;
+                int[][] part_arr = new int[right + 1][2];    // 중간으로부터 x 축 기준 d 이내에 있는 점들만 배열에 저장
+                int j = 0;
 
 
-
-            for(int i = 0; i < right+1; i++) { // arr를 n/2 의 x값 기준으로 d 이내에 있는 점들만 part_arr에 저장
-                if(Math.abs(arr[i][0] - arr[mid][0]) < d) {
-                    part_arr[j][0] = arr[i][0];
-                    part_arr[j][1] = arr[i][1];
-                    j++;
+                for (int i = 0; i < right + 1; i++) { // arr를 n/2 의 x값 기준으로 d 이내에 있는 점들만 part_arr에 저장
+                    if (Math.abs(arr[i][0] - arr[mid][0]) < d) {
+                        part_arr[j][0] = arr[i][0];
+                        part_arr[j][1] = arr[i][1];
+                        j++;
+                    }
                 }
+                return Math.min(d, part(part_arr, j, d));
             }
-            return Math.min(d, part(part_arr, j, d));
         }
         return Double.MAX_VALUE;
     }
@@ -135,6 +148,7 @@ public class ClosestPairOfPoints {
             }
         }
         return min;
+
     }
 
 
