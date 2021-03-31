@@ -4,6 +4,7 @@
 
 //03.31 오류 메세지는 안뜨는데 왜 점이 3개 이상일떄 거리가 0이 나오는거지..?
 //오류 조금 더 수정 근데 아직도 점이 3개 이상일떄 거리 0...
+//일단은 드디어 완성..
 
 import java.util.*;
 
@@ -81,7 +82,7 @@ public class ClosestPairOfPoints {
     static double ClosestPair(int[][] A, int p, int q) { //최근접 점 구하기
         double closest = dist(A, p, q);
         for(int i = p; i < q; i++)
-            for(int j = p+1; j <= q; j++) {
+            for(int j = i + 1; j <= q; j++) {
                 double distance = dist(A, i, j);
                 if(distance < closest) closest = distance;
             }
@@ -99,43 +100,21 @@ public class ClosestPairOfPoints {
 
         double closest = left < right ? left : right;   //왼쪽과 오른쪽 영역 중 더 작은 거리 찾기
 
-
-        int i;                                         //중간영역 구하기
-        for(i = p; i < k;i++ ) {
-            if(A[i][0] > (A[k][0] - closest )) break;
-        }
-        int j;
-        for(j = q; j > k+1; j-- ) {
-            if(A[j][0] < (A[k+1][0] + closest )) break;
-        }
-
-        int[][]Y=new int[j-i+1][2];             //y좌표를 기준으로 정렬할 중간 영역 배열 생성
-        for(int l=i; l<=j; l++) {
-            int m=0;
-            Y[m][0]=A[l][0];
-            Y[m][1]=A[l][1];
-            m++;
-        }
-/*
-        System.out.println("정렬 전");
-        for (int s = 0; s < Y.length; s++) {
-            System.out.println("Y : ("+Y[s][0] + ", " + Y[s][1]+")");
+        int[][] Y = new int[number][2];                    //중간 영역을 y좌표 기준으로 정렬한 배열 생성
+        int n = 0;
+        for (int i = p; i <= q; i++) {
+            int CPC_x = Math.abs(A[i][0] - A[k][0]);
+            if (CPC_x < closest) {
+                Y[n][0] = A[i][0];
+                Y[n++][1] = A[i][1];
+            }
         }
 
- */
+        y_mergeSort(Y,0, n-1);     // y좌표를 기준으로 중간 영역 정렬
 
-        y_mergeSort(Y,0, Y.length-1);     // y좌표를 기준으로 중간 영역 정렬
 
-        /*
-        System.out.println("정렬 후");
-        for (int s = 0; s < Y.length; s++) {
-            System.out.println("Y : ("+Y[s][0] + ", " + Y[s][1]+")");
-        }
-
-         */
-
-        for(int l = 0; l < Y.length-1; l++)
-            for(int m = 1; m <= Y.length-1; m++){
+        for(int l = 0; l < n-1; l++)                       // 중간영역에서 최근접 점 값 찾아서 비교
+            for(int m = l+1; m < n; m++){
                 if(Math.abs(Y[l][1]-Y[m][1]) <closest) {
                     double t = dist(Y, l, m);
                     if (t < closest)
@@ -167,12 +146,12 @@ public class ClosestPairOfPoints {
         ClosestPairOfPoints sorter = new ClosestPairOfPoints();
         sorter.x_mergeSort(arr, 0, arr.length - 1);
 
-        /*
+
         System.out.println("정렬 후");
         for (int i = 0; i < arr.length; i++) {
             System.out.println("("+arr[i][0] + ", " + arr[i][1]+")");
         }
-         */
+
 
         System.out.println();
 
@@ -180,6 +159,21 @@ public class ClosestPairOfPoints {
             System.out.println("점의 개수가 0개이다.");
         else if(arr.length==1)
             System.out.println("점의 개수가 1개이다.");
+        else if(arr.length==2){
+            System.out.println("점의 개수가 2개 이다.");
+            System.out.println("(" + arr[0][0] + ", " + arr[0][1] + "), (" + arr[1][0] + ", " + arr[1][1] + ")의 거리 : "+dist(arr,0,1));
+        }
+        else if(arr.length==3) {
+            double A = dist(arr,0,1);
+            double B = dist(arr,1,2);
+            double C = dist(arr,0,2);
+            System.out.print("점의 개수가 3개이다.\n최근접 점");
+            if(A<=B && A<=C)
+                System.out.println("(" + arr[0][0] + ", " + arr[0][1] + "), (" + arr[1][0] + ", " + arr[1][1] + ")의 거리 : " + A);
+            else if(B<=A && B<=C)
+                System.out.println("(" + arr[1][0] + ", " + arr[1][1] + "), (" + arr[2][0] + ", " + arr[2][1] + ")의 거리 : " + B);
+            else System.out.println("(" + arr[0][0] + ", " + arr[0][1] + "), (" + arr[3][0] + ", " + arr[3][1] + ")의 거리 : " + C);
+        }
         else {
             double closestdistance = searchClosest(arr, 0, arr.length - 1);
             System.out.println("최근접 점 쌍의 거리 : " + closestdistance);
