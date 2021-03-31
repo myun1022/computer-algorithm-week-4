@@ -3,6 +3,7 @@
 //03.30 나머지부분 다 짜봤는데 역시나 오류....
 
 //03.31 오류 메세지는 안뜨는데 왜 점이 3개 이상일떄 거리가 0이 나오는거지..?
+//오류 조금 더 수정 근데 아직도 점이 3개 이상일떄 거리 0...
 
 import java.util.*;
 
@@ -98,13 +99,14 @@ public class ClosestPairOfPoints {
 
         double closest = left < right ? left : right;   //왼쪽과 오른쪽 영역 중 더 작은 거리 찾기
 
+
         int i;                                         //중간영역 구하기
         for(i = p; i < k;i++ ) {
-            if(A[i][0] > A[k][0] - closest ) break;
+            if(A[i][0] > (A[k][0] - closest )) break;
         }
         int j;
-        for(j = q; i > k+1; j-- ) {
-            if(A[j][0] < A[k][0] + closest ) break;
+        for(j = q; j > k+1; j-- ) {
+            if(A[j][0] < (A[k+1][0] + closest )) break;
         }
 
         int[][]Y=new int[j-i+1][2];             //y좌표를 기준으로 정렬할 중간 영역 배열 생성
@@ -114,8 +116,23 @@ public class ClosestPairOfPoints {
             Y[m][1]=A[l][1];
             m++;
         }
+/*
+        System.out.println("정렬 전");
+        for (int s = 0; s < Y.length; s++) {
+            System.out.println("Y : ("+Y[s][0] + ", " + Y[s][1]+")");
+        }
+
+ */
 
         y_mergeSort(Y,0, Y.length-1);     // y좌표를 기준으로 중간 영역 정렬
+
+        /*
+        System.out.println("정렬 후");
+        for (int s = 0; s < Y.length; s++) {
+            System.out.println("Y : ("+Y[s][0] + ", " + Y[s][1]+")");
+        }
+
+         */
 
         for(int l = 0; l < Y.length-1; l++)
             for(int m = 1; m <= Y.length-1; m++){
@@ -125,7 +142,6 @@ public class ClosestPairOfPoints {
                         closest = t;
                 }
             }
-
 
         return closest;
     }
@@ -151,10 +167,12 @@ public class ClosestPairOfPoints {
         ClosestPairOfPoints sorter = new ClosestPairOfPoints();
         sorter.x_mergeSort(arr, 0, arr.length - 1);
 
+        /*
         System.out.println("정렬 후");
         for (int i = 0; i < arr.length; i++) {
             System.out.println("("+arr[i][0] + ", " + arr[i][1]+")");
         }
+         */
 
         System.out.println();
 
