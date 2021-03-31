@@ -81,12 +81,7 @@ public class ClosestPairOfPoints {
     static double div_con(int[][] arr, int left, int right) {
 
         mergeSortX(arr, left, right);
-
         // 좌표가 3개 이하이면 그냥 거리를 구한다
-
-
-
-
 
         if(arr.length == 3){
             double distance = getDistance(arr,0,1);;
@@ -148,9 +143,7 @@ public class ClosestPairOfPoints {
             }
         }
         return min;
-
     }
-
 
     public static void main(String[] args) {
         Random r = new Random();
@@ -160,7 +153,6 @@ public class ClosestPairOfPoints {
             arr[i][1] = r.nextInt(10); //y좌표
             System.out.println(arr[i][0] + " " + arr[i][1]); //정렬 전 출력
         }
-
 
         ClosestPairOfPoints sorter = new ClosestPairOfPoints();
         sorter.mergeSortX(arr, 0, arr.length - 1);
