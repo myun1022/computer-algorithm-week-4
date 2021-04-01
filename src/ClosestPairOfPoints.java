@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class ClosestPairOfPoints {
 
-    static void mergeSortX(int[][] A, int p, int q) {
+    public static void mergeSortX(int[][] A, int p, int q) {
         if (p >= q) return;       //배열의 원소의 수가 2개 이상이여야 함
         int k = (p + q) / 2;      //중간
 
@@ -38,7 +38,7 @@ public class ClosestPairOfPoints {
 
     }
 
-    static void mergeSortY(int[][] A, int p, int q) {
+    public static void mergeSortY(int[][] A, int p, int q) {
         if (p >= q) return;       //배열의 원소의 수가 2개 이상이여야 함
         int k = (p + q) / 2;      //중간
 
