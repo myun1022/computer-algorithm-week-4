@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="32ef605f-1fbf-408c-afc6-05d5f9d6caf7" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/computer-algorithm-week-4/ClosestPairOfPoints/src/ClosestPairOfPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/computer-algorithm-week-4" beforeDir="false" afterPath="$PROJECT_DIR$/computer-algorithm-week-4" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
