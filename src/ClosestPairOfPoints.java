@@ -91,7 +91,11 @@ public class ClosestPairOfPoints {
         for (int i = left; i < size; i++) {           //가장 짧은 거리를 찾는다
             for (int j = i + 1; j < size; j++) {
                 d = distance(A, i, j);
-                if (d < close) { close = d; a = i; b = j; }
+                if (d < close) {
+                    close = d;
+                    a = i;
+                    b = j;
+                }
             }
         }
         if (A.length == 3) {                     //주어진 점이 3개일 경우 그 중에 가장 근접한 2개의 점 출력(동일한 거리가 존재하면 하나의 쌍만 출력됩니다.)
@@ -109,7 +113,7 @@ public class ClosestPairOfPoints {
 
         int mid = (left + right) / 2;
         double CP_left = ClosestPair(A, left, mid);                     //중간을 기준으로 왼쪽과 오른쪽에서의 최근접 점 거리를 구함
-        double CP_right = ClosestPair(A, mid + 1, right);			//분할 정복 이용
+        double CP_right = ClosestPair(A, mid + 1, right);            //분할 정복 이용
         double min_dist = Math.min(CP_left, CP_right);
 
         //중앙 부분에 더 가까운 거리가 있을 수 있다
@@ -138,9 +142,6 @@ public class ClosestPairOfPoints {
 
     }
 
-
-
-
     public static void main(String[] args) {
 
         Random r = new Random();
@@ -158,15 +159,14 @@ public class ClosestPairOfPoints {
             System.out.println(arr[i][0] + " " + arr[i][1]);      //주어진 점의 좌표 확인
         }
 
-        if(arr.length==0)
+        if (arr.length == 0)
             System.out.println("점의 개수가 0개 이다.");
-        else if(arr.length==1)
+        else if (arr.length == 1)
             System.out.println("점의 개수가 1개 이다.");
-        else if(arr.length==2){
+        else if (arr.length == 2) {
             System.out.println("점의 개수가 2개 이다.");
-            System.out.println("(" + arr[0][0] + ", " + arr[0][1] + "), (" + arr[1][0] + ", " + arr[1][1] + ")의 거리 : "+distance(arr,0,1));
-        }
-        else {
+            System.out.println("(" + arr[0][0] + ", " + arr[0][1] + "), (" + arr[1][0] + ", " + arr[1][1] + ")의 거리 : " + distance(arr, 0, 1));
+        } else {
             double closestdistance = ClosestPair(arr, 0, arr.length - 1);
             System.out.println("최근접 점 쌍의 거리 : " + closestdistance);
         }

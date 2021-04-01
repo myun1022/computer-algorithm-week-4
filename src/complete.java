@@ -94,7 +94,11 @@ public class complete {
             for (int i = left; i < size; i++) {           //가장 짧은 거리를 찾는다
                 for (int j = i + 1; j < size; j++) {
                     d = distance(A, i, j);
-                    if (d < close) { close = d; a = i; b = j; }
+                    if (d < close) {
+                        close = d;
+                        a = i;
+                        b = j;
+                    }
                 }
             }
             if (A.length == 3) {                     //주어진 점이 3개일 경우 그 중에 가장 근접한 2개의 점 출력(동일한 거리가 존재하면 하나의 쌍만 출력됩니다.)
